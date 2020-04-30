@@ -66,7 +66,7 @@
                     id="reserve-unique-id"
                   />
                 </div>
-                <button type="submit" class="btn btn-primary submit">
+                <button type="submit" class="btn btn-primary submit" id="submit-btn">
                   Submit
                 </button>
               </form>
@@ -80,5 +80,31 @@
         <p><a href="#">API Table Link</a> | <a href="#">API Wait List</a></p>
       </div>
     </footer>
+
+    <script type="text/javascript">
+      const nameInput = $('#reserve-name');
+      const phoneInput = $('#reserve-phone');
+      const emailInput = $('#reserve-email');
+      const idInput = $('#reserve-unique-id');
+      function Reservation(name, phone, email, id) {
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.id = id;
+      }
+      $('#submit-btn').on('click', (event) => {
+        event.preventDefault();
+        const nameVal = nameInput.val().trim();
+        const phoneVal = phoneInput.val().trim();
+        const emailVal = emailInput.val().trim();
+        const idVal = idInput.val().trim();
+      
+        const reservation = new Reservation(nameVal, phoneVal, emailVal, idVal);
+      
+        $.post('/reserve',reservation, function(data) {
+          alert(data);
+        });
+      });
+    </script>
   </body>
 </html>
