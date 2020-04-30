@@ -27,12 +27,12 @@
         <br />
 
         <div class="text-center">
-          <a href="reserve.html"
+          <a href="/reserve"
             ><button class="btn btn-lg btn-danger">
               <span class="fa fa-credit-card"></span> Make Reservation
             </button></a
           >
-          <a href="index.html"
+          <a href="/"
             ><button class="btn btn-lg btn-default">
               <span class="fa fa-home"></span></button
           ></a>
@@ -66,5 +66,28 @@
         <p><a href="#">API Table Link</a> | <a href="#">API Wait List</a></p>
       </div>
     </footer>
+
+
+    <script type="text/javascript">
+      const ulEl = $('#tableList');
+      function renderReservations() {
+        $.get('/api/tables', function(data) {
+          const reservations = data;
+
+          reservations.forEach(element => {
+            let liEl = `
+              <li>${element.name}</li>
+              <li>${element.mobile}</li>
+              <li>${element.email}</li>
+              <li>${element.id}</li>
+            `
+            ulEl.append(liEl);
+          });
+          console.log(reservations);
+        })
+      }
+
+      renderReservations();
+    </script>
   </body>
 </html>
